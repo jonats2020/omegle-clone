@@ -7,7 +7,6 @@ import logo from './images/omegle-logo.png';
 import VideoPlayer from './components/VideoPlayer';
 
 const SERVER_URL = 'https://omegle-clone-nats.herokuapp.com/';
-// const SERVER_URL = 'http://localhost:5000';
 
 const socket = io(SERVER_URL);
 
@@ -117,6 +116,11 @@ const App = () => {
     const response = await fetch(SERVER_URL);
 
     const activeUsers = await response.json();
+
+    const index = activeUsers.indexOf(myStreamId);
+    if (index > -1) {
+      activeUsers.splice(index, 1);
+    }
 
     const numberOfActiveUsers = activeUsers.length;
 
